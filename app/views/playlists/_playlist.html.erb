@@ -1,0 +1,12 @@
+<%= link_to(playlist_path(playlist), {class: "playlist_part playlist-#{playlist.id} do_this_playlist",remote: true}) do %>
+	<% if playlist_counter == (indexused-1) %>
+	   <li class="pl_selected">
+	<% else %>
+		<li>
+	<% end %>
+	  <span class="content"><%= playlist.title %></span>
+	  <span class="timestamp">
+	    Posted <%= time_ago_in_words(playlist.created_at) %> ago.
+	  </span>
+	</li>
+<% end %>
