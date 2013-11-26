@@ -10,10 +10,9 @@ class PlaylistsController < ApplicationController
 	end
 
 	def create
-		@playlist = Playlist.new(post_params)
+		@playlist = Playlist.new(params[:playlist])
 
 		@playlist.save
-		redirect_to @playlist
 	end
 
 	def show

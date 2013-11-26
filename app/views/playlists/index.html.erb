@@ -5,7 +5,7 @@
           <ul class="playlists">
             <li> 
               <%= form_tag('/playlists', method: :post, remote: true) do %>
-              <%= text_field_tag(:name, nil, placeholder: 'New playlist') %>
+              <%= text_field_tag(:title, nil, placeholder: 'New playlist') %>
               <% end %> 
             </li>
             <%= render @playlists, :indexused => @playlist.id %>

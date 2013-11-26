@@ -1,0 +1,8 @@
+<% if @playlist.valid? %>
+
+$('.playlists').append '<li class=\"last\"><%= j(render @playlist) %></li>'
+$('.playlists title').val ''
+
+<% end %>
+
+put 'funstuff'
