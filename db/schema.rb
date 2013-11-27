@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131024180842) do
+ActiveRecord::Schema.define(version: 20131127065714) do
 
   create_table "playlistations", force: true do |t|
     t.integer  "playlist_id"
@@ -45,5 +45,15 @@ ActiveRecord::Schema.define(version: 20131024180842) do
 
   add_index "songs", ["url"], name: "index_songs_on_url"
   add_index "songs", ["youtubeid"], name: "index_songs_on_youtubeid"
+
+  create_table "users", force: true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
