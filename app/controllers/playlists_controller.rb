@@ -1,8 +1,8 @@
 class PlaylistsController < ApplicationController
 	def index
-		@playlist = Playlist.first
+		@playlists = current_user.playlists
+		@playlist = @playlists.first
 		@songs = @playlist.songs.paginate(page: params[:page])
-		@playlists = Playlist.all
 	end
 
 	def new

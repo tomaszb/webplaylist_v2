@@ -1,0 +1,25 @@
+.welcomepage{
+	background-color: #000;
+
+	#intro{
+		color: #fff;
+		font-size: 40px;
+		font-weight: bold;
+		margin-top: 200px;
+		margin-left: 350px;
+		line-height: 30px;
+
+	}
+	#introsub{
+		color: #fff;
+		margin-left: 390px;
+	}
+}
+
+.welcomepage #sign_in{
+	position: absolute;
+	margin-top: 350px;
+	margin-left: 600px;
+	width: 250px;
+	height: 60px;
+}

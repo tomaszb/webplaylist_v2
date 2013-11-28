@@ -1,4 +1,5 @@
 class Playlist < ActiveRecord::Base
+	belongs_to :user
 	has_many :playlistations, dependent: :destroy
 	has_many :songs, :through => :playlistations
 
