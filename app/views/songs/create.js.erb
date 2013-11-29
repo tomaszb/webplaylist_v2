@@ -1,1 +1,2 @@
-$('#songs_form_to_render').append("<%= escape_javascript(render('song', song: @song')) %>")
+$('#songs_form_to_render').append('<%= escape_javascript(render @song, :song_counter => (@playlist.songs.count + 1)) %>')
+$('#song_url').val('')

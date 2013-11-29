@@ -3,14 +3,13 @@
     <section>
       <% if @playlists %>
           <ul class="playlists">
-            <li> 
-              <%= form_tag('/playlists', method: :post, remote: true) do %>
-              <%= text_field_tag(:title, nil, placeholder: 'New playlist') %>
-              <% end %> 
-            </li>
             <%= render @playlists, :indexused => @playlist.id %>
           </ul>
       <% end %>
+      <%= form_tag('/playlists', method: :post, remote: true) do %>
+        <%= text_field_tag(:title, nil, {placeholder: 'New playlist', autocomplete: "off"}) %>
+        <%= hidden_field_tag(:user_id, @current_user.id) %>
+      <% end %> 
     </section>
   </aside>
     <div class="span8" id="songspan">
@@ -22,32 +21,17 @@
       <h3>Songs (<%= @playlist.songs.count %>)</h3>
         <ul class="songs">
         <li> 
-          <%= form_tag('/songs', method: :post, remote: true) do %>
-          <%= text_field_tag(:url, nil, placeholder: 'Add song') %>
-          <% end %> 
         </li>
         <div id="songs_form_to_render">
           <%= render @songs %>
         </div>
         <li> 
           <%= form_tag('/songs', method: :post, remote: true) do %>
-          <%= text_field_tag(:url, nil, placeholder: 'Add song') %>
+          <%= text_field_tag(:url, nil,{placeholder: 'Add song', id: "song_url", autocomplete: "off"}) %>
+          <%= hidden_field_tag(:pl_id, "#{@playlist.id}") %>
           <% end %> 
         </li>
       </ul>
-      <%= will_paginate @songs %>
-    <% end %>
-
-
-    <%= form_tag(songs_path, remote: true) do %>
-    	<p>
-    		<%= label_tag :url %><br>
-        	<%= text_field_tag :url, nil, :class => 'songinput' %>
-
-        	<%= hidden_field_tag "pl_id", @playlist.id %>
-
-        	<%= submit_tag "Add song!" %>
-    	</p>
     <% end %>
 
   </div>

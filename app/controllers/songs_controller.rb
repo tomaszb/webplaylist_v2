@@ -7,19 +7,17 @@ class SongsController < ApplicationController
 
 	def create
 		@playlist = Playlist.find_by_id(params[:pl_id])
+		puts params[:url]
 		songid = getID(params[:url])
 		@song = Song.new(url:params[:url], youtubeid: songid)
 
 		@playlistation = Playlistation.new(song:@song,playlist:@playlist)
-		
 		if @song.save and @playlistation.save
-			render :partial => 'song', :object => @song
+			respond_to do |format|
+				format.html {redirect_to :back}
+    			format.js
+    		end
 		end
-
-		respond_to do |format|
-			format.html {redirect_to :back}
-    		format.js
-    	end
 	end
 
 	private

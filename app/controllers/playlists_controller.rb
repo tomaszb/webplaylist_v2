@@ -1,8 +1,12 @@
 class PlaylistsController < ApplicationController
 	def index
-		@playlists = current_user.playlists
-		@playlist = @playlists.first
-		@songs = @playlist.songs.paginate(page: params[:page])
+		if current_user
+			@playlists = current_user.playlists
+			@playlist = @playlists.first
+			@songs = @playlist.songs
+		else
+			redirect_to root_url
+		end
 	end
 
 	def new
@@ -10,14 +14,18 @@ class PlaylistsController < ApplicationController
 	end
 
 	def create
-		@playlist = Playlist.new(params[:playlist])
-
-		@playlist.save
+		@playlist = Playlist.new(title:params[:title], user_id:params[:user_id])
+		if @playlist.save
+			respond_to do |format|
+				format.html {redirect_to :back}
+    			format.js
+    		end
+		end
 	end
 
 	def show
 		@playlist = Playlist.find(params[:id])
-		@songs = @playlist.songs.paginate(page: params[:page])
+		@songs = @playlist.songs
 		@playlists = Playlist.all
 		puts @playlist.songs
 		respond_to do |format|
@@ -32,6 +40,6 @@ class PlaylistsController < ApplicationController
 
 	private
 		def post_params
-			params.require(:playlist).permit(:title)
+			params.require(:playlist).permit(:title, :user_id)
 		end
 end
