@@ -24,10 +24,8 @@ class PlaylistsController < ApplicationController
 	end
 
 	def show
-		@playlist = Playlist.find(params[:id])
+		@playlist = current_user.playlists.find(params[:id])
 		@songs = @playlist.songs
-		@playlists = Playlist.all
-		puts @playlist.songs
 		respond_to do |format|
 		  format.html
 	      format.js

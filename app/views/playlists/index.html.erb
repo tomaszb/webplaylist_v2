@@ -18,7 +18,7 @@
 
 
     <% if @playlist.songs %>
-      <h3>Songs (<%= @playlist.songs.count %>)</h3>
+      <h3>Songs</h3>
         <ul class="songs">
         <li> 
         </li>
@@ -28,7 +28,7 @@
         <li> 
           <%= form_tag('/songs', method: :post, remote: true) do %>
           <%= text_field_tag(:url, nil,{placeholder: 'Add song', id: "song_url", autocomplete: "off"}) %>
-          <%= hidden_field_tag(:pl_id, "#{@playlist.id}") %>
+          <%= hidden_field_tag(:pl_id, @playlist.id) %>
           <% end %> 
         </li>
       </ul>

@@ -1,1 +1,3 @@
-$('#songs_form_to_render').html('<%= j render @playlist.songs %>');
+$('#songs_form_to_render').html('<%= j render @songs %>');
+
+$('#pl_id').val('<%= @playlist.id %>');
