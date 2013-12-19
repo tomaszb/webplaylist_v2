@@ -49,17 +49,28 @@ window.onPlayerStateChange = (event) ->
 window.stopVideo = ->
   window.player.stopVideo()
 
+@bindsongs = (parent) ->
+  parent.find('.song_part').on 'click', ->
+      window.all_songs = $(this).data('songs');
+      window.index_song = $(this).data('index');
+      window.player.loadVideoById(window.all_songs[window.index_song].youtubeid);
+      $('.selected_song').removeClass('selected_song')
+      $(this).addClass('selected_song');
+      window.song_playing = $('.selected_song').attr('class').substring(10,16);
+  if ($("." + window.song_playing).length != 0)
+    $("."+window.song_playing).addClass('selected_song');
+
 $ ->
-  $('.song_part').click ->
-    console.log("song click");
-    window.all_songs = $(this).data('songs');
-    window.index_song = $(this).data('index');
-    window.player.loadVideoById(window.all_songs[window.index_song].youtubeid);
-    $('.selected_song').removeClass('selected_song')
-    $(this).addClass('selected_song');
+  $('.song_part').on 'click', ->
+      window.all_songs = $(this).data('songs');
+      window.index_song = $(this).data('index');
+      window.player.loadVideoById(window.all_songs[window.index_song].youtubeid);
+      $('.selected_song').removeClass('selected_song')
+      $(this).addClass('selected_song');
 
   $('.playlist_part').click ->
-    console.log("gothere");
+    if ($('.selected_song').length != 0)
+      window.song_playing = $('.selected_song').attr('class').substring(10,16);
     window.index_playlist = $(this).data('index');
     $('.pl_selected').removeClass("pl_selected");
     $(this).find('li').addClass('pl_selected');
