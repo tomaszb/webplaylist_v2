@@ -57,8 +57,15 @@ window.stopVideo = ->
       $('.selected_song').removeClass('selected_song')
       $(this).addClass('selected_song');
       window.song_playing = $('.selected_song').attr('class').substring(10,16);
+  
   if ($("." + window.song_playing).length != 0)
-    $("."+window.song_playing).addClass('selected_song');
+    console.log("first here");
+    if ($("."+ window.song_playing).data('index') != window.index_song)
+      console.log("second_here");
+      $('.song_part[data-index="'+window.index_song+'"]').addClass('selected_song');
+    else
+      console.log("third here");
+      $("."+window.song_playing).addClass('selected_song');
 
 $ ->
   $('.song_part').on 'click', ->
